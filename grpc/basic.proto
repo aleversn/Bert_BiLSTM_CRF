@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+/*FileController*/
+service File {
+    rpc upload (stream FileBody) returns (Response);
+}
+
+/*PredictController*/
+service Train {
+    rpc pred (PredictInfo) returns (Response);
+}
+
+/*PredictController*/
+service Predict {
+    rpc pred (PredictInfo) returns (Response);
+}
+
+
+message TrainInfo {
+    string guid = 1;
+    repeated float X = 2;
+    int32 k = 3;
+    bool ignore_first_row = 4;
+}
+
+message PredictInfo {
+    string guid = 1;
+    repeated float X = 2;
+    int32 k = 3;
+    bool ignore_first_row = 4;
+}
+
+message Response {
+    string status = 1;
+    string result = 2;
+}
+
+message FileBody {
+    bytes file = 1;
+}
