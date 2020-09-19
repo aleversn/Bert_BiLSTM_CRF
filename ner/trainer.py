@@ -26,15 +26,15 @@ class NERTrainer(ITrainer):
     bert_config_file_name: Bert模型配置文件路径
     pretrained_file_name: Bert预训练模型加载路径
     hidden_dim: CRF隐藏层
-    train_file_name
-    vocab_file_name
-    tags_file_name
-    eval_file_name
-    word_tag_split
-    pattern
-    padding_length
-    batch_size
-    eval_batch_size
+    train_file_name: 训练集文件路径
+    vocab_file_name: 单词表文件路径
+    tags_file_name: Tag表文件路径
+    eval_file_name: 测试集文件路径
+    word_tag_split: 文字Tag分隔符
+    pattern: 断句符
+    padding_length: 填充裁剪长度
+    batch_size: 训练集batch_size
+    eval_batch_size: 测试集batch_size, 缺省时等于训练集batch_size
     '''
     def __init__(self, num_epochs, num_gpus,
                  bert_config_file_name,

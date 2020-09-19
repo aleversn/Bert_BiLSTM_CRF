@@ -1,13 +1,33 @@
 syntax = "proto3";
 
-/*FileController*/
-service File {
-    rpc upload (stream FileBody) returns (Response);
+/*TaskController*/
+service Task {
+    /*
+    创建一个训练任务
+    return {guid}
+    */
+    rpc createTrain (stream FileBody) returns (Response);
+    /*
+    创建一个训练任务
+    return {
+        bert_config_file
+        vocab_file
+        tags_file
+        bert_model
+        lstm_crf_model
+    }
+    */
+    rpc getModel (GetInfo) returns (Response);
+    /*
+    创建一个预测任务
+    return {guid}
+    */
+    rpc createPredict (stream FileBody) returns (Response);
 }
 
 /*PredictController*/
 service Train {
-    rpc pred (PredictInfo) returns (Response);
+    rpc train (TrainInfo) returns (stream Response);
 }
 
 /*PredictController*/
@@ -18,16 +38,25 @@ service Predict {
 
 message TrainInfo {
     string guid = 1;
-    repeated float X = 2;
-    int32 k = 3;
-    bool ignore_first_row = 4;
+    int32 num_epochs = 2;
+    repeated int32 num_gpus = 3;
+    int32 hidden_dim = 4;
+    string word_tag_split = 5;
+    string pattern = 6;
+    int32 padding_length = 7;
+    int32 batch_size = 8;
+    int32 eval_batch_size = 9;
 }
 
 message PredictInfo {
     string guid = 1;
-    repeated float X = 2;
-    int32 k = 3;
-    bool ignore_first_row = 4;
+    bool use_gpu = 2;
+    int32 hidden_dim = 3;
+}
+
+message GetInfo {
+    string guid = 1;
+    string model_id = 2;
 }
 
 message Response {
@@ -36,5 +65,6 @@ message Response {
 }
 
 message FileBody {
-    bytes file = 1;
+    string name = 1;
+    bytes file = 2;
 }

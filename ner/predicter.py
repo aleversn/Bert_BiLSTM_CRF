@@ -16,6 +16,16 @@ from ner.model import BertNER
 
 class NERPredict(IPredict):
 
+    '''
+    构造函数, 初始化预测器
+    use_gpu: 使用GPU
+    bert_config_file_name: Bert模型配置文件路径
+    vocab_file_name: 单词表文件路径
+    tags_file_name: Tag表文件路径
+    bert_model_path: Bert模型装载路径
+    lstm_crf_model_path: CRF模型装载路径
+    hidden_dim: CRF隐藏层
+    '''
     def __init__(self, use_gpu,
                  bert_config_file_name,
                  vocab_file_name,
@@ -69,7 +79,7 @@ class NERPredict(IPredict):
     def pred(self, sentences):
         sentences = self.data_process(sentences)
 
-        if torch.cuda.is_available():
+        if torch.cuda.is_available() and self.use_gpu:
             self.model.cuda()
             self.birnncrf.cuda()
             sentences = sentences.cuda()
