@@ -24,8 +24,8 @@ predict = NERPredict(True,
                      bert_config_file_name='./model/chinese_wwm_ext/bert_config.json',
                      vocab_file_name='./model/chinese_wwm_ext/vocab.txt',
                      tags_file_name='./data/news_tags_list.txt',
-                     bert_model_path='./save_model/bert/45f2bda2_bert.pth',
-                     lstm_crf_model_path='./save_model/lstm_crf/45f2bda2_lstm_crf.pth',
+                     bert_model_path='./save_model/bert/b38f6126_bert.pth',
+                     lstm_crf_model_path='./save_model/lstm_crf/b38f6126_lstm_crf.pth',
                      hidden_dim=150)
 
 # %%

@@ -146,8 +146,8 @@ class NERTrainer(ITrainer):
             if self.eval_data:
                 self.eval()
         
-        self.analysis.save_csv()
-        yield (current_epoch, self.analysis.train_record, self.analysis.eval_record, self.analysis.model_record)
+        save_guid = self.analysis.save_csv()
+        yield (current_epoch, self.analysis.train_record, self.analysis.eval_record, self.analysis.model_record, save_guid)
 
     def eval(self):
         alpha = 1e-10
