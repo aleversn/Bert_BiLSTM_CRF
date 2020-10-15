@@ -129,7 +129,7 @@ class NERTrainer(ITrainer):
                 train_gold_num += self.analysis.getRecall(tags)
 
                 train_acc = train_correct_num / train_pred_num if train_correct_num != 0 else 0
-                train_recall = train_correct_num / train_gold_num if train_correct_num != 0 else 0
+                train_recall = train_correct_num / train_gold_num if train_gold_num != 0 else 0
 
                 train_iter.set_description(
                     'Epoch: {}/{} Train'.format(current_epoch, self.num_epochs))
@@ -185,7 +185,7 @@ class NERTrainer(ITrainer):
             test_gold_num += self.analysis.getRecall(tags)
 
             test_acc = test_correct_num / test_pred_num if test_correct_num != 0 else 0
-            test_recall = test_correct_num / test_gold_num if test_correct_num != 0 else 0
+            test_recall = test_correct_num / test_gold_num if test_gold_num != 0 else 0
 
             test_iter.set_description('Eval Result')
             test_iter.set_postfix(eval_loss=eval_loss / test_count, eval_acc=test_acc, eval_recall=test_recall,
